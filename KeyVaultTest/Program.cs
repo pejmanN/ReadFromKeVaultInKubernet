@@ -4,7 +4,7 @@ using KeyVaultTest.Settings;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.ConfigureAzureKeyVault();
+//builder.ConfigureAzureKeyVault();
 
 builder.Services.Configure<UserSetting>(builder.Configuration.GetSection(nameof(UserSetting)));
 

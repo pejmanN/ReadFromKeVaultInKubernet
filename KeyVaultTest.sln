@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{CE84FF40-F8CE-4CEF-966B-936F3A03A18E}"
 	ProjectSection(SolutionItems) = preProject
 		Kubernetes\application.yaml = Kubernetes\application.yaml
+		Kubernetes\secretproviderclass.yaml = Kubernetes\secretproviderclass.yaml
 		Kubernetes\service.yaml = Kubernetes\service.yaml
 		Kubernetes\serviceaccount.yaml = Kubernetes\serviceaccount.yaml
 	EndProjectSection

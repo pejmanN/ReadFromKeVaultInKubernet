@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: keyvaultapp-deployment
+  namespace: dev
 spec:
   selector:
     matchLabels:
@@ -15,13 +16,19 @@ spec:
       serviceAccountName: keyvaultapp-serviceaccount
       containers:
         - name: keyvaultapp
-          image: ordercontainerregistry.azurecr.io/keyvaultapp:1.0.3
+          image: ordercontainerregistry.azurecr.io/keyvaultapp:1.0.4
           ports:
             - containerPort: 5002
           env:
-            - name: KeyVaultSetting__Url
-              value: https://myorderkeyvault.vault.azure.net/
-           
+            - name: UserSetting__MySecret
+              valueFrom:
+                secretKeyRef:
+                  name: keyvault-secrets
+                  key: UserSetting__MySecret
+          volumeMounts:
+            - name: secrets-store
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
           resources:
             limits:
               memory: "128Mi"
@@ -29,6 +36,10 @@ spec:
             requests:
               memory: "128Mi"
               cpu: "150m"
-      restartPolicy: Always
-  
-
+      volumes:
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "azure-keyvault-secrets"
