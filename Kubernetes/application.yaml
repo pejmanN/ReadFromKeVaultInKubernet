@@ -16,7 +16,7 @@ spec:
       serviceAccountName: keyvaultapp-serviceaccount
       containers:
         - name: keyvaultapp
-          image: ordercontainerregistry.azurecr.io/keyvaultapp:1.0.4
+          image: ordercontainerregistry.azurecr.io/keyvaultapp:1.0.5
           ports:
             - containerPort: 5002
           env:
